@@ -1,0 +1,12 @@
+name: ipcc_ch5f04
+channels:
+  - conda-forge
+  - anaconda
+
+dependencies:
+  - python=3.9
+  - pandas
+  - numpy
+  - matplotlib
+  - scipy
+
