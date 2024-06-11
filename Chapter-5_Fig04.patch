@@ -1,0 +1,92 @@
+diff --git a/AR6_fig5.4_3GHGs_ts.py b/AR6_fig5.4_3GHGs_ts.py
+index ce7683b..de6c97d 100644
+--- a/AR6_fig5.4_3GHGs_ts.py
++++ b/AR6_fig5.4_3GHGs_ts.py
+@@ -18,23 +18,25 @@ from matplotlib.ticker import AutoMinorLocator
+ import pandas as pd
+ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+ import Process_data
++import sys 
++sys.path.append("..") 
+ import ccgfilt_mod
+ 
+-p1  = './data/co2_sio/scripps_stn_data/' # co2 direct measuremets
+-p2  = './data/ch4_all/' # ch4 direct measuremets
+-p3  = './data/n2o_all/out_p01/' # ch4 direct measuremets
++p1  = './co2_sio/' # co2 direct measuremets
++p2  = './ch4_all/' # ch4 direct measuremets
++p3  = './n2o_all/' # ch4 direct measuremets
+ 
+ # lawDomeIce core (AD)
+-p4  = './data/lawDomeIceCore_data/co2_data.txt'
+-p5  = './data/lawDomeIceCore_data/ch4_data.txt'
+-p6  = './data/lawDomeIceCore_data/n2o_data.txt'
++p4  = './lawDomeIceCore_data/co2_data.txt'
++p5  = './lawDomeIceCore_data/ch4_data.txt'
++p6  = './lawDomeIceCore_data/n2o_data.txt'
+ 
+ #EPA Dome data (800 kyr$^{-1}$ BC): VOSTOCK
+-p7  = './data/lawDomeIceCore_data/Ch2_ice_core.txt' # Updated icecore data
+-p8  = './data/lawDomeIceCore_data/edc_ch4_2008.txt'
+-p9  = './data/lawDomeIceCore_data/edc_n2o_2008.txt'
++p7  = './lawDomeIceCore_data/Ch2_ice_core.txt' # Updated icecore data
++p8  = './lawDomeIceCore_data/edc_ch4_2008.txt'
++p9  = './lawDomeIceCore_data/edc_n2o_2008.txt'
+ 
+-p10 = './data/'
++p10 = '../'
+ 
+ ###################################################
+ #************** Defined variables *****************
+diff --git a/Process_data.py b/Process_data.py
+index 07ca0f3..959e2ff 100644
+--- a/Process_data.py
++++ b/Process_data.py
+@@ -66,7 +66,7 @@ def StnCO2read(datpath, dum_yr, stn):
+     vals  = []
+     ss    = ifile.split('/')[-1].split('_')[0]; print(ss)
+     vals  = np.loadtxt(ifile,dtype='float',skiprows=60)
+-    yr    = np.array(vals[:,0],dtype=np.int)#; print(yr$^{-1}$)
++    yr    = np.array(vals[:,0],dtype=int)#; print(yr$^{-1}$)
+     dat   = np.array(vals[:,4]) # obs_fitted
+     dat[dat<250] = np.nan
+ 
+@@ -165,9 +165,10 @@ def IceDatRead(path1, path2, path3):
+   # Store all the data in an array
+   ff = []
+   ff.append([c1, c2, c3])
+-  ice_dat = np.array(ff)
++  # print(c1.shape, c2.shape, c3.shape)
++  # ice_dat = np.array(ff)
+ 
+-  return ice_dat
++  return ff
+ 
+ 
+ # ************ Read Vostock/EPA data ******************
+@@ -195,9 +196,9 @@ def VosDatRead(path1, path2, path3):
+   # Store all the data in an array
+   ff = []
+   ff.append([c1, c2, c3])
+-  VOS_dat = np.array(ff)
++  # VOS_dat = np.array(ff)
+ 
+-  return VOS_dat
++  return ff
+ 
+ 
+ # ************ High resolution data ******************
+@@ -226,10 +227,10 @@ def WdcDatRead(path1):
+ 
+    # Store all the data in an array
+    ff = []
+-   ff.append([WDC_CO2,WDC_CH4])
+-   WDC_dat = np.array(ff)
++   ff.append([WDC_CO2, WDC_CH4])
++  #  WDC_dat = np.array(ff)
+ 
+-   return WDC_dat
++   return ff
+ 
+ 
+ # ************ Long lived greenhouse gases ******************

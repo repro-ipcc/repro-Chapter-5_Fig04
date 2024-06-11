@@ -1,4 +1,4 @@
-# ipcc-ar6-wg1-figure Chapter 5 Figure 04
+# ipcc-ar6-wg1-figure Chapter 5 Figure 04 (Finished)
 
 
 
@@ -33,6 +33,3 @@ To re-create the figure of Chapter 5 Figure 04:
 ```sh
 bash run.sh
 ```
-
-
-
